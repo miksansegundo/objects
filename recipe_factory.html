@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by suyeda623 (http://jsbin.com/qucolu/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <h1 class="js-recipe-name">Not working!</h1>
+ 
+  <div class="js-ingredients">
+    <h2>ingredients will show up here when working</h2>
+  </div>
+  <div class="js-steps">
+    <h2 class="js-steps">steps will show up here when working<h2/>
+  </div>
+ 
+   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script id="jsbin-javascript">
+function recipeFactory(name, ingredients, steps) {
+  return {
+    name: name,
+    ingredients: ingredients,
+    steps: steps,
+    stepsHtml: function() {
+      return '<ol>' + this.steps.map(
+        function(step) {return '<li>' + step + '</li>'; }).join('') + '</ol>';
+    },
+    ingredientsHtml: function() {
+      return '<ul>' + this.ingredients.map(
+        function(ing) {return '<li>' + ing + '</li>'; }).join('') + '</ul>';
+    }
+  }
+}
+
+
+// tests
+
+function testRecipeFactory() {  
+  var grilledCheese = recipeFactory(
+    'grilled cheese',
+    ['2 slices bread', 'butter', '1 slice cheese'],
+    ['Butter bread', 'Put cheese between bread', 'Toast bread on stove']
+  ); 
+  if (grilledCheese) {
+    // `$` is a shortcut to the jQuery library, which
+    // you'll learn about in the next unit.
+    // Here, we're using jQuery to update elements in the HTML
+    $('.js-recipe-name').text(grilledCheese.name);
+    $('.js-ingredients').html(grilledCheese.ingredientsHtml());
+    $('.js-steps').html(grilledCheese.stepsHtml());
+  }
+}
+
+testRecipeFactory()
+</script>
+</body>
+</html>
